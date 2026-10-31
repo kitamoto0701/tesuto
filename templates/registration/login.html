@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<div class="card login"><span class="tag">WORKSPACE LOGIN</span><h1>おかえりなさい</h1><p class="muted">管理者から案内されたアカウントでログインしてください。</p><form method="post">{% csrf_token %}{{ form.as_p }}<button>ログイン</button></form><p class="muted">パスワードを忘れた場合は管理者へご連絡ください。</p></div>{% endblock %}

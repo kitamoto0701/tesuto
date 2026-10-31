@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1>操作履歴</h1><p class="muted">直近200件。パスワードや入力内容は履歴に記録しません。</p><div class="card scroll"><table><tr><th>日時</th><th>操作ユーザー</th><th>操作</th><th>対象</th></tr>{% for l in logs %}<tr><td>{{ l.created_at }}</td><td>{{ l.actor }}</td><td>{{ l.action }}</td><td>{{ l.target }}</td></tr>{% endfor %}</table></div>{% endblock %}

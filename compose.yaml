@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: taiho
+      POSTGRES_USER: taiho
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a local database password in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U taiho -d taiho"]
+      interval: 5s
+      retries: 10
+  web:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      DEBUG: "1"
+      DATABASE_URL: postgresql://taiho:${POSTGRES_PASSWORD}@db:5432/taiho
+      DB_SSLMODE: disable
+      ALLOWED_HOSTS: localhost,127.0.0.1
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  pgdata:

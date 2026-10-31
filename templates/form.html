@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1>{{ title|default:'パスワード変更' }}</h1><div class="card edit"><form method="post">{% csrf_token %}{{ form.as_p }}<button>保存する</button> <a href="/">ダッシュボードへ</a></form></div>{% endblock %}
